@@ -13,14 +13,14 @@
 ## coffee grinder
 - [fellow ode gen 2](https://fellowproducts.com/products/ode-brew-grinder-gen-2)
 - [wilfa uniform](https://www.wilfa.se/product/utgagna-produkter-sv/kok-ut/uniform-kaffekvarn)
-- [comandante c40](https://www.comandantegrinder.com/index.html)
 
 ## true wireless earbuds
-- [samsung buds 2 pro](https://www.samsung.com/global/galaxy/galaxy-buds2-pro)
+- [technics eah-az100](https://us.technics.com/products/premium-hi-fi-true-wireless-earbuds-with-dolby-atmos-and-noise-cancelling-eah-az100)
 - [apple airpods pro](https://www.apple.com/se/airpods-pro)
 
 ## mechanical keyboard
 - [keychron q2/q3/q5](https://www.keychron.com/products/keychron-q2-qmk-custom-mechanical-keyboard)
+- [mode](https://modedesigns.com/)
 
 ## air purifier
 - [xiaomi air purifier 4 pro](https://www.mi.com/global/product/xiaomi-smart-air-purifier-4-pro)
@@ -32,8 +32,8 @@
 - [macbook pro](https://www.apple.com/macbook-pro-14-and-16)
 
 ## phone
-- [samsung s24 ultra](https://www.samsung.com/se/smartphones/galaxy-s24-ultra)
-- [iphone 15 pro (max)](https://www.apple.com/iphone-15-pro)
+- [xiaomi 15 ultra](https://www.mi.com/global/product/xiaomi-15-ultra/)
+- [iphone 16 pro (max)](https://www.apple.com/iphone-16-pro)
 
 ## phone screen protector
 - [whitestone dome](https://www.whitestonedome.com)
@@ -61,6 +61,9 @@
 ## —stockholm
 ### burgers
 - [funky chicken foodtruck](https://goo.gl/maps/CFbVxNzu6EDpCRGw6?coh=178571&entry=tt)
+
+### japanese
+- [miyakodori](https://maps.app.goo.gl/KxRJg2S9ngXpjqVB9)
 
 ### pizza
 - [bara vedugnspizza](https://www.baravedugnspizza.se)
