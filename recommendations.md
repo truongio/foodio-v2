@@ -57,6 +57,13 @@
 ## towels
 - [singular society towels](https://singular-society.com/products/hand-towel-50x70?variant=32887944118295)
 
+## macOS
+- [raycast](https://raycast.com)
+- [dia browser](https://diabrowser.com)
+- [karabiner elements](https://karabiner-elements.pqrs.org/)
+- [obsidian](https://obsidian.md)
+- [leaderkey](https://github.com/mikker/LeaderKey.app)
+
 ## food
 ### —stockholm
 ### burgers
