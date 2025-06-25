@@ -1,4 +1,4 @@
-# recommendations
+## recommendations
 
 ## underwear
 - [cdlp](https://cdlp.com/products/3-boxer-brief-black?variant=32611985784903)
@@ -57,8 +57,8 @@
 ## towels
 - [singular society towels](https://singular-society.com/products/hand-towel-50x70?variant=32887944118295)
 
-# food
-## —stockholm
+## food
+### —stockholm
 ### burgers
 - [funky chicken foodtruck](https://goo.gl/maps/CFbVxNzu6EDpCRGw6?coh=178571&entry=tt)
 

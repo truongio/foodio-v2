@@ -16,11 +16,8 @@ async function fetchAndParseMarkdown() {
 // Parse markdown and convert to HTML
 function parseMarkdown(markdown) {
   let html = '<div class="story-container">';
-  html += '<div class="page-title">recommendations</div>';
   
   const lines = markdown.split('\n');
-  let inFood = false;
-  let inStockholm = false;
   
   for (let i = 0; i < lines.length; i++) {
     const line = lines[i].trim();
@@ -28,53 +25,98 @@ function parseMarkdown(markdown) {
     // Skip empty lines
     if (!line) continue;
     
-    // Handle main sections (# headings)
+    // Handle h1 headers (#)
     if (line.startsWith('# ')) {
       const title = line.substring(2);
-      if (title.toLowerCase() === 'food') {
-        inFood = true;
-        html += `<h2>${title}</h2>`;
-      } else {
-        // Main title is already added as page-title
-        if (title.toLowerCase() !== 'recommendations') {
-          html += `<h2>${title}</h2>`;
-        }
-      }
+      html += `<h1>${title}</h1>`;
       continue;
     }
     
-    // Handle stockholm section
-    if (line.startsWith('## —')) {
-      const location = line.substring(4);
-      inStockholm = true;
-      html += `<h5>${location}</h5>`;
-      continue;
-    }
-    
-    // Handle categories (## or ### headings)
-    if (line.startsWith('## ') || line.startsWith('### ')) {
-      const category = line.substring(line.startsWith('## ') ? 3 : 4);
+    // Handle h2 headers (##) - check if it has following list items
+    if (line.startsWith('## ')) {
+      const title = line.substring(3);
       
-      // Start a new recommendation item list
-      html += `<p class="recommendation-item-list">`;
-      html += `<b>${category}</b>`;
-      
-      // Look ahead for list items
+      // Look ahead to see if this has list items (making it a category)
       let j = i + 1;
-      while (j < lines.length && lines[j].trim().startsWith('- [')) {
-        const linkLine = lines[j].trim();
-        const linkMatch = linkLine.match(/- \[(.*?)\]\((.*?)\)/);
-        
-        if (linkMatch) {
-          const [, text, url] = linkMatch;
-          html += `<a href="${url}" target="_blank" rel="noopener noreferrer">${text}</a>`;
+      let hasListItems = false;
+      while (j < lines.length && (lines[j].trim() === '' || lines[j].trim().startsWith('- ['))) {
+        if (lines[j].trim().startsWith('- [')) {
+          hasListItems = true;
+          break;
         }
-        
         j++;
       }
       
-      html += '</p>';
-      i = j - 1; // Skip processed list items
+      if (hasListItems) {
+        // This is a category with items
+        html += `<p><b>${title}</b><br />`;
+        
+        // Process the list items
+        const links = [];
+        j = i + 1;
+        while (j < lines.length && (lines[j].trim() === '' || lines[j].trim().startsWith('- ['))) {
+          const linkLine = lines[j].trim();
+          if (linkLine.startsWith('- [')) {
+            const linkMatch = linkLine.match(/- \[(.*?)\]\((.*?)\)/);
+            if (linkMatch) {
+              const [, text, url] = linkMatch;
+              links.push(`<a href="${url}">${text}</a>`);
+            }
+          }
+          j++;
+        }
+        
+        html += links.join('<br />\n');
+        html += '</p>';
+        i = j - 1; // Skip processed list items
+      } else {
+        // This is a regular header
+        html += `<h2>${title}</h2>`;
+      }
+      continue;
+    }
+    
+    // Handle h3 headers (###) - check if it has following list items
+    if (line.startsWith('### ')) {
+      const title = line.substring(4);
+      
+      // Look ahead to see if this has list items (making it a category)
+      let j = i + 1;
+      let hasListItems = false;
+      while (j < lines.length && (lines[j].trim() === '' || lines[j].trim().startsWith('- ['))) {
+        if (lines[j].trim().startsWith('- [')) {
+          hasListItems = true;
+          break;
+        }
+        j++;
+      }
+      
+      if (hasListItems) {
+        // This is a category with items
+        html += `<p><b>${title}</b><br />`;
+        
+        // Process the list items
+        const links = [];
+        j = i + 1;
+        while (j < lines.length && (lines[j].trim() === '' || lines[j].trim().startsWith('- ['))) {
+          const linkLine = lines[j].trim();
+          if (linkLine.startsWith('- [')) {
+            const linkMatch = linkLine.match(/- \[(.*?)\]\((.*?)\)/);
+            if (linkMatch) {
+              const [, text, url] = linkMatch;
+              links.push(`<a href="${url}">${text}</a>`);
+            }
+          }
+          j++;
+        }
+        
+        html += links.join('<br />\n');
+        html += '</p>';
+        i = j - 1; // Skip processed list items
+      } else {
+        // This is a regular header
+        html += `<h5>${title}</h5>`;
+      }
       continue;
     }
   }
