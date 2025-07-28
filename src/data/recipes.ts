@@ -63,9 +63,9 @@ export const recipes: Record<string, RecipeData> = {
   butadon: {
     title: "butadon",
     ingredients: [
-      { amount: "200\u202fg", item: "jasmine rice x 350\u202fg water" },
-      { amount: "300\u202fg", item: "pork belly" },
-      { amount: "6\u202fcm", item: "ginger" },
+      { amount: "200 g", item: "jasmine rice x 350 g water" },
+      { amount: "300 g", item: "pork belly" },
+      { amount: "6 cm", item: "ginger" },
       { amount: "1", item: "onion" },
       { amount: "1", item: "nappa cabbage" },
       { amount: "0.5 dl", item: "xiao xing" },
