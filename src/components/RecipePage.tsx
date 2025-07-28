@@ -30,13 +30,26 @@ function formatUnits(text: string | undefined): string {
 function scaleAmount(amount: string | undefined, scale: number): string | undefined {
   if (!amount) return amount;
   
-  // Extract numbers (including decimals) from the amount string with context
-  const numberWithUnitRegex = /(\d+(?:\.\d+)?)\s*(g|grams?|ml|milliliters?)\b/gi;
+  // Use a single comprehensive regex to handle all numbers and their units
+  const numberRegex = /(\d+(?:\.\d+)?)(\s*)(g|grams?|ml|milliliters?|kg|l|dl|cl|tbsp|tsp|cups?|oz|lbs?|cm|mm|°C|°F|minutes?|mins?|hours?|hrs?|seconds?|secs?|celsius|degrees?)?/gi;
   
-  // First handle gram/ml conversions to kg/l
-  let result = amount.replace(numberWithUnitRegex, (match, numStr, unit) => {
+  return amount.replace(numberRegex, (match, numStr, spacing, unit) => {
     const num = parseFloat(numStr);
     const scaled = num * scale;
+    
+    // If there's no unit, or it's a time/temperature unit, just scale the number
+    if (!unit || /^(minutes?|mins?|hours?|hrs?|seconds?|secs?|°C|°F|celsius|degrees?)$/i.test(unit)) {
+      let scaledStr;
+      if (scaled % 1 === 0) {
+        scaledStr = scaled.toString();
+      } else if (scaled < 1) {
+        scaledStr = scaled.toFixed(2).replace(/\.?0+$/, '');
+      } else {
+        scaledStr = scaled.toFixed(1).replace(/\.0$/, '');
+      }
+      return scaledStr + spacing + (unit || '');
+    }
+    
     const lowerUnit = unit.toLowerCase();
     
     // Convert grams to kg if >= 1000
@@ -71,34 +84,6 @@ function scaleAmount(amount: string | undefined, scale: number): string | undefi
     
     return `${scaledStr}\u202F${unit}`;
   });
-  
-  // Then handle any remaining numbers without specific units, but exclude time-related ones
-  const remainingNumberRegex = /(\d+(?:\.\d+)?)(\s*)(?!(minutes?|mins?|hours?|hrs?|seconds?|secs?|°C|celsius|degrees?)\b)/gi;
-  
-  result = result.replace(remainingNumberRegex, (match, numStr, spacing) => {
-    // Skip if this number was already processed (has kg or l after it)
-    if (result.indexOf(numStr + '\u202Fkg') !== -1 || result.indexOf(numStr + '\u202Fl') !== -1) {
-      return match;
-    }
-    
-    const num = parseFloat(numStr);
-    const scaled = num * scale;
-    
-    // Format nicely - remove unnecessary decimals
-    let scaledStr;
-    if (scaled % 1 === 0) {
-      scaledStr = scaled.toString();
-    } else if (scaled < 1) {
-      scaledStr = scaled.toFixed(2).replace(/\.?0+$/, '');
-    } else {
-      scaledStr = scaled.toFixed(1).replace(/\.0$/, '');
-    }
-    
-    // Preserve the original spacing (or lack thereof)
-    return scaledStr + spacing;
-  });
-  
-  return result;
 }
 
 export default function RecipePage({ recipe }: RecipePageProps) {
