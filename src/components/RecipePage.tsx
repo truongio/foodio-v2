@@ -26,8 +26,42 @@ function scaleIngredient(ingredient: Ingredient, scale: number): { amount: strin
     return { amount: "", unit: "" };
   }
   
-  // Handle string amounts (like "1-2", "10 to 15")
+  // Handle string amounts - check if it's a number with unit in the string (legacy format)
   if (typeof ingredient.amount === 'string') {
+    // Try to parse legacy format like "300 g" or "0.5 dl"
+    const match = ingredient.amount.match(/^(\d+(?:\.\d+)?)\s*([a-zA-Z]+)$/);
+    if (match) {
+      const [, numStr, unit] = match;
+      const num = parseFloat(numStr);
+      const scaledAmount = num * scale;
+      
+      // Auto-convert units if scaled amount is large enough
+      if (unit === 'g' && scaledAmount >= 1000) {
+        const kg = scaledAmount / 1000;
+        const formattedKg = kg % 1 === 0 ? kg.toString() : kg.toFixed(1).replace(/\.0$/, '');
+        return { amount: formattedKg, unit: "kg" };
+      }
+      
+      if (unit === 'ml' && scaledAmount >= 1000) {
+        const l = scaledAmount / 1000;
+        const formattedL = l % 1 === 0 ? l.toString() : l.toFixed(1).replace(/\.0$/, '');
+        return { amount: formattedL, unit: "l" };
+      }
+      
+      // Format the scaled amount
+      let formattedAmount: string;
+      if (scaledAmount % 1 === 0) {
+        formattedAmount = scaledAmount.toString();
+      } else if (scaledAmount < 1) {
+        formattedAmount = scaledAmount.toFixed(2).replace(/\.?0+$/, '');
+      } else {
+        formattedAmount = scaledAmount.toFixed(1).replace(/\.0$/, '');
+      }
+      
+      return { amount: formattedAmount, unit };
+    }
+    
+    // For non-numeric strings like "1-2", "10 to 15", return as-is
     return { amount: ingredient.amount, unit: ingredient.unit || "" };
   }
   
