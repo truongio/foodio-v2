@@ -127,11 +127,11 @@ export default function RecipePage({ recipe }: RecipePageProps) {
   const [scale, setScale] = useState(1);
 
   const incrementScale = () => {
-    setScale(prev => prev + 1);
+    setScale(prev => prev + 0.5);
   };
 
   const decrementScale = () => {
-    setScale(prev => Math.max(1, prev - 1));
+    setScale(prev => Math.max(0.5, prev - 0.5));
   };
 
   return (
