@@ -130,7 +130,7 @@ export default function RecipePage({ recipe }: RecipePageProps) {
           <div className="flex items-center gap-2 text-sm">
             <button
               onClick={decrementScale}
-              className="w-8 h-8 rounded border border-gray-300 hover:border-gray-400 bg-white text-black transition-colors flex items-center justify-center"
+              className="w-8 h-8 rounded bg-white text-black hover:bg-gray-100 transition-colors flex items-center justify-center"
             >
               −
             </button>
@@ -139,7 +139,7 @@ export default function RecipePage({ recipe }: RecipePageProps) {
             </span>
             <button
               onClick={incrementScale}
-              className="w-8 h-8 rounded border border-gray-300 hover:border-gray-400 bg-white text-black transition-colors flex items-center justify-center"
+              className="w-8 h-8 rounded bg-white text-black hover:bg-gray-100 transition-colors flex items-center justify-center"
             >
               +
             </button>
