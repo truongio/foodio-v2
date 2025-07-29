@@ -1,5 +1,6 @@
 export interface Ingredient {
-  amount?: string;
+  amount?: number | string;
+  unit?: string;
   item: string;
 }
 
@@ -14,18 +15,18 @@ export const recipes: Record<string, RecipeData> = {
   fagioli: {
     title: "pasta e fagioli",
     ingredients: [
-      { amount: "1", item: "onion" },
-      { amount: "100 g", item: "pasta" },
-      { amount: "400 g", item: "salsiccia" },
-      { amount: "80 g", item: "pancetta" },
+      { amount: 1, item: "onion" },
+      { amount: 100, unit: "g", item: "pasta" },
+      { amount: 400, unit: "g", item: "salsiccia" },
+      { amount: 80, unit: "g", item: "pancetta" },
       { amount: "1-2", item: "carrot(s)" },
-      { amount: "1", item: "celery" },
-      { amount: "3", item: "garlic cloves" },
-      { amount: "500 g", item: "canned tomatoes" },
-      { amount: "2.5 dl", item: "white wine" },
-      { amount: "2", item: "bayleaf" },
-      { amount: "7 dl", item: "chicken stock (2 cubes)" },
-      { amount: "300 g", item: "white beans" },
+      { amount: 1, item: "celery" },
+      { amount: 3, item: "garlic cloves" },
+      { amount: 500, unit: "g", item: "canned tomatoes" },
+      { amount: 2.5, unit: "dl", item: "white wine" },
+      { amount: 2, item: "bayleaf" },
+      { amount: 7, unit: "dl", item: "chicken stock (2 cubes)" },
+      { amount: 300, unit: "g", item: "white beans" },
     ],
     toppings: [
       { item: "Parmesan" },
@@ -43,14 +44,14 @@ export const recipes: Record<string, RecipeData> = {
   checca: {
     title: "pasta alla checca",
     ingredients: [
-      { amount: "250 g", item: "spaghetti" },
-      { amount: "300 g", item: "fresh tomatoes (cherry, heirloom or roma)" },
-      { amount: "45 g", item: "olive oil" },
-      { amount: "10 to 15 leaves", item: "fresh basil" },
-      { amount: "1 tbsp", item: "dried oregano" },
-      { amount: "1 tbsp", item: "fresh thyme (or dried), minced" },
-      { amount: "150 g", item: "fresh mozzarella balls" },
-      { amount: "10 cranks", item: "freshly ground black pepper" },
+      { amount: 250, unit: "g", item: "spaghetti" },
+      { amount: 300, unit: "g", item: "fresh tomatoes (cherry, heirloom or roma)" },
+      { amount: 45, unit: "g", item: "olive oil" },
+      { amount: "10 to 15", unit: "leaves", item: "fresh basil" },
+      { amount: 1, unit: "tbsp", item: "dried oregano" },
+      { amount: 1, unit: "tbsp", item: "fresh thyme (or dried), minced" },
+      { amount: 150, unit: "g", item: "fresh mozzarella balls" },
+      { amount: 10, unit: "cranks", item: "freshly ground black pepper" },
     ],
     instructions: [
       "Start boiling spaghetti.",
@@ -63,7 +64,7 @@ export const recipes: Record<string, RecipeData> = {
   butadon: {
     title: "butadon",
     ingredients: [
-      { amount: "200 g", item: "jasmine rice x 350 g water" },
+      { amount: 200, unit: "g", item: "jasmine rice x 350 g water" },
       { amount: "300 g", item: "pork belly" },
       { amount: "6 cm", item: "ginger" },
       { amount: "1", item: "onion" },
@@ -120,20 +121,20 @@ export const recipes: Record<string, RecipeData> = {
   ragu: {
     title: "ragù alla bolognese",
     ingredients: [
-      { amount: "250 g", item: "pasta" },
-      { amount: "500 g", item: "minced beef" },
-      { amount: "1", item: "onion" },
-      { amount: "1", item: "carrot" },
-      { amount: "1", item: "celery" },
-      { amount: "3", item: "cloves of garlic" },
-      { amount: "4 tbsp", item: "tomato purée" },
-      { amount: "200 ml", item: "red or white wine" },
-      { amount: "2 tsp", item: "thyme" },
-      { amount: "2 tsp", item: "oregano" },
+      { amount: 250, unit: "g", item: "pasta" },
+      { amount: 500, unit: "g", item: "minced beef" },
+      { amount: 1, item: "onion" },
+      { amount: 1, item: "carrot" },
+      { amount: 1, item: "celery" },
+      { amount: 3, item: "cloves of garlic" },
+      { amount: 4, unit: "tbsp", item: "tomato purée" },
+      { amount: 200, unit: "ml", item: "red or white wine" },
+      { amount: 2, unit: "tsp", item: "thyme" },
+      { amount: 2, unit: "tsp", item: "oregano" },
       { item: "Salt" },
       { item: "Pepper" },
-      { amount: "2", item: "bay leaf" },
-      { amount: "400-500 g", item: "can of tomatoes" },
+      { amount: 2, item: "bay leaf" },
+      { amount: "400-500", unit: "g", item: "can of tomatoes" },
     ],
     instructions: [
       "In a pot, glaze onion, carrot, and celery (2/1/1 ratio) in olive oil at medium heat (5/9). After 1 minute, add garlic. Remove from pot.",
