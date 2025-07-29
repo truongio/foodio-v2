@@ -123,6 +123,18 @@ function formatIngredientDisplay(amount: string, unit: string): string {
   return `${amount}\u202F${unit}`;
 }
 
+function interpolateIngredients(text: string, ingredients: Ingredient[], scale: number): string {
+  return text.replace(/\{ingredient\.(\d+)\}/g, (match, indexStr) => {
+    const index = parseInt(indexStr, 10);
+    if (index >= 0 && index < ingredients.length) {
+      const ingredient = ingredients[index];
+      const { amount, unit } = scaleIngredient(ingredient, scale);
+      return formatIngredientDisplay(amount, unit);
+    }
+    return match; // Return original if index is invalid
+  });
+}
+
 function renderMarkdown(text: string): React.ReactElement {
   // Simple markdown renderer for basic formatting
   const parts = text.split(/(\*\*[^*]+\*\*|##\s.*$)/gm);
@@ -220,9 +232,10 @@ export default function RecipePage({ recipe }: RecipePageProps) {
         )}
 
         {recipe.instructions.map((instruction, index) => {
+          const interpolatedInstruction = interpolateIngredients(instruction, recipe.ingredients, scale);
           return (
             <div key={index} className="mb-4">
-              {renderMarkdown(instruction)}
+              {renderMarkdown(interpolatedInstruction)}
             </div>
           );
         })}
