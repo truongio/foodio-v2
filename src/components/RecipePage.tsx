@@ -72,8 +72,12 @@ function formatIngredientDisplay(amount: string, unit: string): string {
 export default function RecipePage({ recipe }: RecipePageProps) {
   const [scale, setScale] = useState(1);
 
-  const handleScaleChange = (newScale: number) => {
-    setScale(newScale);
+  const incrementScale = () => {
+    setScale(prev => prev + 1);
+  };
+
+  const decrementScale = () => {
+    setScale(prev => Math.max(1, prev - 1));
   };
 
   return (
@@ -89,47 +93,21 @@ export default function RecipePage({ recipe }: RecipePageProps) {
         <div className="flex items-center justify-between mb-8">
           <h1 className="text-4xl font-normal text-left">{recipe.title}</h1>
           
-          <div className="flex items-center gap-3 text-sm">
-            <span className="text-gray-600">scale:</span>
+          <div className="flex items-center gap-2 text-sm">
             <button
-              onClick={() => handleScaleChange(0.5)}
-              className={`w-8 h-8 rounded border transition-colors ${
-                scale === 0.5 
-                  ? 'bg-black text-white border-black' 
-                  : 'bg-white text-black border-gray-300 hover:border-gray-400'
-              }`}
+              onClick={decrementScale}
+              className="w-8 h-8 rounded border border-gray-300 hover:border-gray-400 bg-white text-black transition-colors flex items-center justify-center"
             >
-              ½
+              −
             </button>
+            <span className="w-8 text-center font-mono">
+              {scale}
+            </span>
             <button
-              onClick={() => handleScaleChange(1)}
-              className={`w-8 h-8 rounded border transition-colors ${
-                scale === 1 
-                  ? 'bg-black text-white border-black' 
-                  : 'bg-white text-black border-gray-300 hover:border-gray-400'
-              }`}
+              onClick={incrementScale}
+              className="w-8 h-8 rounded border border-gray-300 hover:border-gray-400 bg-white text-black transition-colors flex items-center justify-center"
             >
-              1
-            </button>
-            <button
-              onClick={() => handleScaleChange(2)}
-              className={`w-8 h-8 rounded border transition-colors ${
-                scale === 2 
-                  ? 'bg-black text-white border-black' 
-                  : 'bg-white text-black border-gray-300 hover:border-gray-400'
-              }`}
-            >
-              2
-            </button>
-            <button
-              onClick={() => handleScaleChange(3)}
-              className={`w-8 h-8 rounded border transition-colors ${
-                scale === 3 
-                  ? 'bg-black text-white border-black' 
-                  : 'bg-white text-black border-gray-300 hover:border-gray-400'
-              }`}
-            >
-              3
+              +
             </button>
           </div>
         </div>
