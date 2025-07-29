@@ -125,7 +125,7 @@ function formatIngredientDisplay(amount: string, unit: string): string {
 
 function renderMarkdown(text: string): React.ReactElement {
   // Simple markdown renderer for basic formatting
-  const parts = text.split(/(\*\*[^*]+\*\*|##\s[^#\n]+)/g);
+  const parts = text.split(/(\*\*[^*]+\*\*|##\s.*$)/gm);
   
   return (
     <>
@@ -136,11 +136,11 @@ function renderMarkdown(text: string): React.ReactElement {
           return <strong key={index}>{content}</strong>;
         } else if (part.startsWith('## ')) {
           // Heading
-          const content = part.slice(3);
+          const content = part.slice(3).trim();
           return <h3 key={index} className="text-lg font-medium mb-2 mt-6">{content}</h3>;
         } else {
-          // Regular text
-          return <span key={index}>{part}</span>;
+          // Regular text - filter out empty parts
+          return part ? <span key={index}>{part}</span> : null;
         }
       })}
     </>
