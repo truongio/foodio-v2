@@ -12,9 +12,9 @@ const recipes = [
 
 export default function Home() {
   return (
-    <div className="font-serif bg-white text-black min-h-screen flex flex-col justify-center items-start pl-[25%]">
+    <div className="font-serif bg-white text-black min-h-screen flex flex-col justify-center items-center px-8 lg:items-start lg:pl-[25%] lg:px-0">
       <main className="max-w-4xl w-full">
-        <div className="text-4xl leading-relaxed text-left">
+        <div className="text-3xl sm:text-4xl leading-relaxed text-center lg:text-left">
           {recipes.map((recipe, index) => (
             <span key={recipe.name}>
               <Link
