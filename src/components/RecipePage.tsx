@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import React, { useState } from "react";
 
 interface Ingredient {
   amount?: number | string;
@@ -123,7 +123,7 @@ function formatIngredientDisplay(amount: string, unit: string): string {
   return `${amount}\u202F${unit}`;
 }
 
-function renderMarkdown(text: string): JSX.Element {
+function renderMarkdown(text: string): React.ReactElement {
   // Simple markdown renderer for basic formatting
   const parts = text.split(/(\*\*[^*]+\*\*|##\s[^#\n]+)/g);
   
