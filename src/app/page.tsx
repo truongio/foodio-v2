@@ -13,13 +13,13 @@ const recipes = [
 export default function Home() {
   return (
     <div className="font-serif bg-white text-black min-h-screen flex flex-col justify-center items-center px-8 pt-32 lg:items-start lg:pl-[25%] lg:px-0 lg:pt-0">
-      <main className="max-w-4xl w-full">
+      <main className="max-w-4xl w-full animate-fadeIn">
         <div className="text-3xl sm:text-4xl leading-relaxed text-center lg:text-left">
           {recipes.map((recipe, index) => (
             <span key={recipe.name}>
               <Link
                 href={recipe.href}
-                className={`text-black no-underline font-normal hover:text-gray-600 transition-colors ${
+                className={`text-black no-underline font-normal hover:text-gray-600 transition-colors link-underline ${
                   recipe.italic ? "italic" : ""
                 }`}
               >

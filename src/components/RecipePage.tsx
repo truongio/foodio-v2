@@ -172,12 +172,12 @@ export default function RecipePage({ recipe }: RecipePageProps) {
 
   return (
     <div className="font-serif bg-white text-black flex h-screen justify-center items-center">
-      <div className="pt-60 pb-8 px-8 lg:p-0 m-auto max-w-[1096px]">
+      <div className="pt-60 pb-8 px-8 lg:p-0 m-auto max-w-[1096px] animate-fadeIn">
         <Link
           href="/"
-          className="inline-block mb-8 text-gray-600 no-underline text-base hover:text-black"
+          className="group inline-block mb-8 text-gray-600 no-underline text-base hover:text-black transition-colors"
         >
-          ← back
+          <span className="inline-block transition-transform duration-150 group-hover:-translate-x-1">←</span> back
         </Link>
 
         <div className="flex items-center justify-between mb-8">
@@ -186,16 +186,16 @@ export default function RecipePage({ recipe }: RecipePageProps) {
           <div className="flex items-center gap-2 text-sm">
             <button
               onClick={decrementScale}
-              className="w-8 h-8 rounded bg-white text-black hover:bg-gray-100 transition-colors flex items-center justify-center"
+              className="w-8 h-8 rounded bg-white text-black hover:bg-gray-100 active:scale-90 transition-all duration-100 flex items-center justify-center"
             >
               −
             </button>
-            <span className="w-8 text-center font-mono">
+            <span className="w-8 text-center font-mono tabular-nums">
               {scale}
             </span>
             <button
               onClick={incrementScale}
-              className="w-8 h-8 rounded bg-white text-black hover:bg-gray-100 transition-colors flex items-center justify-center"
+              className="w-8 h-8 rounded bg-white text-black hover:bg-gray-100 active:scale-90 transition-all duration-100 flex items-center justify-center"
             >
               +
             </button>
