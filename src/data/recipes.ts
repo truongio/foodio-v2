@@ -66,7 +66,7 @@ export const recipes: Record<string, RecipeData> = {
     ingredients: [
       { amount: 200, unit: "g", item: "jasmine rice" }, 
       { amount: 500, unit: "g", item: "pork belly" },
-      { amount: 6, unit: "cm", item: "ginger" },
+      { amount: 30, unit: "g", item: "ginger" },
       { amount: 1, item: "onion" },
       { amount: "1", item: "nappa cabbage" },
       { amount: "0.5 dl", item: "xiao xing" },
